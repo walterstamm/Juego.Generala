@@ -35,8 +35,6 @@
 		<Unit filename="funciones.cpp" />
 		<Unit filename="funciones.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="masfunciones.cpp" />
-		<Unit filename="masfunciones.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
