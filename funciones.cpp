@@ -148,6 +148,13 @@ int minimoVector(int v[], int tam){
     return posMin;
 }
 
+void PuntuacionMasAlta(int puntuacion,char *Nombre,int cantRondas){///recibe nombre , puntuacion y cantidad de rondas
+
+
+
+
+}
+
 void ordenarVector(int v[], int tam ){
     int i,j, posmin, aux;
     for(i=0;i<tam-1;i++){

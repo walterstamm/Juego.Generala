@@ -3,6 +3,8 @@
 
 void MenuPrincipal();
 
+void PuntuacionMasAlta(int ,char *,int );
+
 int contarNumerosRepetidos(int v[], int tam , int numero);///cuenta la cantidad de veces que se repite un //número en el vector
 
 int maximoVector(int v[], int tam);///devuelve  la posición (primera) que ocupa el máximo en el vector
