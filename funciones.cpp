@@ -13,9 +13,9 @@ srand(time(NULL));
     bienvenida();
 
     while(true){
-        char nombre1[20],nombre2[20],respuesta,respuestaRelanzar;
+        char nombre1[20],nombre2[20],respuesta,respuestaRelanzar,nombrePuntuacion[20];
         int dados[6],puntajeTotaljugador[2],contRonda=0,lanzamientoDados[2],puntajeRonda=0,banderaGeneralaServida[2];
-        int flagGenerala[2];
+        int flagGenerala[2],banderaPuntacion=0,cantRondasPuntuacion,puntosPuntuacion;
         ponerCero(puntajeTotaljugador,2);
         ponerCero(lanzamientoDados,2);
         ponerCero(flagGenerala,2);
@@ -148,8 +148,12 @@ int minimoVector(int v[], int tam){
     return posMin;
 }
 
-void PuntuacionMasAlta(int puntuacion,char *Nombre,int cantRondas){///recibe nombre , puntuacion y cantidad de rondas
+void PuntuacionMasAlta(int puntuacion,char *Nombre,int cantRondas,int *puntosRecord,int *rondasRecord,char *nombreRecord,int *bandera){///recibe nombre , puntuacion y cantidad de rondas
 
+
+    if(bandera==0){
+        return;
+    }
 
 
 
