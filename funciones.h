@@ -3,7 +3,9 @@
 
 void MenuPrincipal();
 
-void PuntuacionMasAlta(int ,char *,int );
+void PuntuacionMasAlta(int ,char *,int ,int *,int *,char *,int *);
+
+void MostrarRecord(char *,int *,int *);
 
 int contarNumerosRepetidos(int v[], int tam , int numero);///cuenta la cantidad de veces que se repite un //número en el vector
 
@@ -52,7 +54,7 @@ void turnoPuntajeRonda (char nombre[20],int puntaje,int ronda);
 
 void bienvenida();
 
-int menu();
+int menu(int *,char *,int *,int *);
 
 void cierreGeneralaSolitario(char nombre1[20],int puntaje, int ronda);
 

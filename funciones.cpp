@@ -11,17 +11,19 @@ void MenuPrincipal(){
 srand(time(NULL));
     int opcion;
     bienvenida();
-
+    char NombreRecord[20];
+    int RondasRecord,PuntosRecord,bandera=0;
     while(true){
-        char nombre1[20],nombre2[20],respuesta,respuestaRelanzar,nombrePuntuacion[20];
+        char nombre1[20],nombre2[20];
         int dados[6],puntajeTotaljugador[2],contRonda=0,lanzamientoDados[2],puntajeRonda=0,banderaGeneralaServida[2];
-        int flagGenerala[2],banderaPuntacion=0,cantRondasPuntuacion,puntosPuntuacion;
+        int flagGenerala[2];
         ponerCero(puntajeTotaljugador,2);
         ponerCero(lanzamientoDados,2);
         ponerCero(flagGenerala,2);
         ponerCero(banderaGeneralaServida,2);
         system("cls");
-        opcion=menu();//funcion para ver menu principal
+        opcion=menu(&bandera,NombreRecord,&RondasRecord,&PuntosRecord);//funcion para ver menu principal
+
 
         switch (opcion){        ///modo de un solo jugador
                 case 1:
@@ -44,9 +46,12 @@ srand(time(NULL));
                 puntajeRonda=combinacionesGanadoras(dados,lanzamientoDados[0],banderaGeneralaServida);
                 flagGenerala[0]=banderaGeneralaServida[0];
                 puntajeTotaljugador[0]+=puntajeRonda;
+
                 system("pause");
                 }
                 cierreGeneralaSolitario(nombre1,puntajeTotaljugador[0],contRonda);
+
+                PuntuacionMasAlta(puntajeTotaljugador[0],nombre1,contRonda,&PuntosRecord,&RondasRecord,NombreRecord,&bandera);
                 system("pause");
                 break;
 
@@ -94,12 +99,14 @@ srand(time(NULL));
 
                 puntajeRonda=combinacionesGanadoras(dados,lanzamientoDados[0],banderaGeneralaServida);
                 flagGenerala[1]=banderaGeneralaServida[0];
-                system("pause");
+
                 puntajeTotaljugador[1]+=puntajeRonda;
 
                 system("pause");}
 
                 buscarGanador(contRonda,nombre1,nombre2,puntajeTotaljugador[0],puntajeTotaljugador[1],flagGenerala);
+                PuntuacionMasAlta(puntajeTotaljugador[0],nombre1,contRonda,&PuntosRecord,&RondasRecord,NombreRecord,&bandera);
+                PuntuacionMasAlta(puntajeTotaljugador[1],nombre2,contRonda,&PuntosRecord,&RondasRecord,NombreRecord,&bandera);
                 system("pause");
 
                 break;
@@ -151,11 +158,38 @@ int minimoVector(int v[], int tam){
 void PuntuacionMasAlta(int puntuacion,char *Nombre,int cantRondas,int *puntosRecord,int *rondasRecord,char *nombreRecord,int *bandera){///recibe nombre , puntuacion y cantidad de rondas
 
 
-    if(bandera==0){
+    if(*bandera==0){
+        strncpy(nombreRecord,Nombre,20);
+        *rondasRecord=cantRondas;
+        *puntosRecord=puntuacion;
+        *bandera=1;
         return;
     }
 
+    if(puntuacion>*puntosRecord){
+        strcpy(nombreRecord,Nombre);
+        *rondasRecord=cantRondas;
+        *puntosRecord=puntuacion;
+    }
+    else{
+        if(puntuacion==*puntosRecord&&cantRondas<*rondasRecord){
+            strcpy(nombreRecord,Nombre);
+            *rondasRecord=cantRondas;
+            *puntosRecord=puntuacion;
+        }
+    }
 
+}
+
+void MostrarRecord(char *Nombre,int *rondas,int *puntos){
+
+    cout<<endl<<endl<<endl;
+    cout << "\t\t********************************************\n\n\n";
+    cout << "\t\t\tPUNTUAJE MAS ALTO "<<Nombre<<" !!"<<endl;
+    cout << "\t\t\tSU PUNTAJE ES: " << *puntos<<endl;
+    cout << "\t\t\tLO HA LOGRADO EN "<<*rondas<< " RONDAS!"<<endl;
+    cout << "\t\t\t\tBIEN HECHO!"<<endl<<endl;
+    cout << "\t\t********************************************\n\n\n";
 
 }
 
@@ -417,14 +451,21 @@ int combinacionesGanadoras(int dados[],int cantLanzamientos,int banderaGeneralaS
     return puntaje;
 }
 
-int menu(){
+int menu(int *bandera,char *NombreRecord,int *RondasRecord,int *PuntosRecord){
     int opcion;
     cout << "\t\tElija una de las siguientes opciones"<< endl;  //menu de opcion de cantidad de jugadores
     cout << "\n\t1. Juego Nuevo, un solo jugador"<<endl;
     cout << "\n\t2. Juego nuevo, dos jugadores" << endl;
     cout << "\n\t0. Salir del juego" << endl<<endl;
+
+    if(*bandera==1){
+            MostrarRecord(NombreRecord,RondasRecord,PuntosRecord);
+
+        }
     cout << "\tSeleccione una opcion: ";
     cin >> opcion;
+
+
     return opcion;
 }
 
