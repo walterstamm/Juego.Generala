@@ -1,9 +1,7 @@
 # depslib dependency file v1.0
-1612916672 source:c:\users\walter\documents\github\juego.generala\main.cpp
+1613609297 source:c:\users\walter\documents\github\juego.generala\main.cpp
 	<iostream>
-	<cstdlib>
 	"funciones.h"
-	<ctime>
 
 1613401039 c:\users\walter\documents\github\juego.generala\funciones.h
 
